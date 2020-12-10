@@ -1,0 +1,42 @@
+def getdate():
+    import datetime
+    return datetime.datetime.now()
+
+def lst_to_str(lst):
+    str = ""
+    for i in lst:
+        str = str + i
+    return (str)
+#persons = []
+print("Are you a new person(y/n)")
+choice = input()
+if choice.lower() == "y":
+    name = input(print("Enter your name: "))
+    # persons.append(name)
+    with open("persons.txt", "a") as per:          #Enter the name of the person to the file person.txt
+        per.write(name+"\n")                       #Enter the name of the person to the file person.txt
+        cont = "y"
+        while cont != "n":
+            food = input("Write your food details: ")
+            with open(name.lower()+".txt", "a") as per:
+                per.write(str("\n" + str(getdate()) + ": " + str(food)))
+            cont = input("Want to write more(y/n): ")
+elif choice.lower() == "n":
+    print("Choose your name from below")
+    with open("persons.txt") as per:
+        while (per):
+            line = per.readlines()
+            new_line = lst_to_str(line)
+            print(new_line, end="")
+            name = input()
+            if str(name).lower() in new_line.lower():
+                with open(name + ".txt") as rr:
+                    for i in rr:
+                        print(i, end="")
+                # print("Founded")
+                break
+            else:
+                print("Error 404 ------->> Try again later")
+                break
+else:
+    print("WT* is this.\n :-\\")
