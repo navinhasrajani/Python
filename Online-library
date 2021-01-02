@@ -1,0 +1,82 @@
+class Library:
+    bks = ['ML', 'WEB_DEVELOPER', 'UI DEVELOPER', 'BASICS OF CHEMISTRY']
+    records = {}
+    def __init__(self,username):
+        # print(f"Welcome to {username}'s Library")
+        bks = ['ML', 'WEB_DEVELOPER', 'UI DEVELOPER', 'BASICS OF CHEMISTRY']
+
+    def show_books(self,username,bks):
+        print(f"Welcome to {username.capitalize()}'s Library")
+        print("The book are: ")
+        print("################################")
+        for book in bks:
+            print(book)
+        print("################################")
+
+
+    def lend_book(self,bks,records):
+        lender = input("Enter your name: ")
+        print("The book are: ")
+        print("################################")
+        for book in bks:
+            print(book)
+        print("################################")
+        book = str(input(f"Welcome {lender.capitalize()}. Enter the book you want to take: "))
+        # for key in self.records.keys():
+        if book in self.records:
+            print(f"Sorry this book is already taken by {self.records.get(book)}")
+            # break
+        else:
+            if book in bks:
+                print(f"Thanks {lender}. You have been subscribed to the book {book}")
+                self.records.update({book: lender})
+                    # break
+            else:
+                print(f"{book} book doesn't exist")
+        # else:
+        #     print("Not running for loop")
+
+    def donate(self,bks):
+        donated = input("Enter the name of book: ")
+        bks.append(str(donated).capitalize())
+        print(f"Thanks for donating {donated}")
+
+    def return_book(self,records,username):
+        print("Which book you want to return: ")
+        ret = input()
+        print(f"Thanks you returning {ret}")
+        del self.records[ret]
+
+
+if __name__ == '__main__':
+    print("Welcome to online library")
+    print("Enter the name to create your library: ")
+    lib_name = str(input())
+    choice = 'c'
+    if choice != 'q' and choice != 'c':
+        print("INVALID INPUT ---- :-( ")
+    else:
+        while choice != 'q' and choice == 'c':
+            print("Enter your choice from below")
+            print("1 - Show books")
+            print("2 - Lend books")
+            print("3 - Donate books")
+            print("4 - Return book")
+            user_choice = int(input())
+            l1 = Library(lib_name)
+            if user_choice == 1:
+                l1.show_books(lib_name,l1.bks)
+            elif user_choice == 2:
+                l1.lend_book(l1.bks,l1.records)
+            elif user_choice == 3:
+                l1.donate(l1.bks)
+            elif user_choice == 4:
+                l1.return_book(l1.records,lib_name)
+            else:
+                print("INVALID INPUT ---- :-( ")
+
+
+            choice = input("Quit / Continue(q/c):" )
+    print(l1.records)
+    # for key in l1.records.keys():
+    #     print(key, l1.records[key])
