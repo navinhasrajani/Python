@@ -1,0 +1,96 @@
+from tkinter import *
+def work(event):
+    global screen_value
+    num = event.widget.cget("text")
+    num = str(num)
+
+    if num == "C":
+        screen_value.set("")
+    elif num == "=":
+        try:
+            if screen_value.get().isdigit():
+                value = int(screen_value.get())
+            else:
+                value = eval(screen_value.get())
+            screen_value.set(value)
+        except:
+            screen_value.set("Error...")
+    else:
+        screen_value.set(screen_value.get() + num)
+
+
+root=Tk()
+root.geometry("500x700")
+root.title("My Calc")
+root.wm_iconbitmap("Wineass-Ios7-Redesign-Calculator.ico")
+screen_value = StringVar()
+screen_value.set("")
+entry_frame = Frame(root,bg="grey").pack()
+
+tab = Entry(entry_frame,textvar=screen_value,font="comicsansmc 52 bold").pack(pady=10,padx=10)
+but_frame1 = Frame(root)
+but_frame2 = Frame(root)
+but_frame3 = Frame(root)
+ext_but = Frame(root)
+ext_but1 = Frame(root)
+next_but = Frame(root)
+for but in range(1,4):
+    b=Button(but_frame1,text=but,font="courier 35 italic")
+    b.bind("<Button-1>",work)
+    b.pack(padx=20,side=LEFT,anchor="n")
+but_frame1.pack()
+
+for but in range(4,7):
+    b=Button(but_frame2,text=but,font="courier 35 italic")
+    b.bind("<Button-1>",work)
+    b.pack(padx=20,side=LEFT,anchor="n")
+but_frame2.pack()
+
+for but in range(7,10):
+    b=Button(but_frame3,text=but,font="courier 35 italic")
+    b.bind("<Button-1>",work)
+    b.pack(padx=20,side=LEFT,anchor="n")
+but_frame3.pack()
+
+b=Button(ext_but,text="+",font="courier 35 italic")
+b.bind("<Button-1>",work)
+b.pack(padx=20,side=LEFT,anchor="n")
+#
+b=Button(ext_but,text="-",font="courier 35 italic")
+b.bind("<Button-1>",work)
+b.pack(padx=20,side=LEFT,anchor="n")
+#
+b=Button(ext_but,text="/",font="courier 35 italic")
+b.bind("<Button-1>",work)
+b.pack(padx=20,side=LEFT,anchor="n")
+ext_but.pack()
+#
+b=Button(ext_but1,text=".",font="courier 35 italic")
+b.bind("<Button-1>",work)
+b.pack(padx=20,side=LEFT,anchor="n")
+ext_but1.pack()
+
+b=Button(ext_but1,text="*",font="courier 35 italic")
+b.bind("<Button-1>",work)
+b.pack(padx=20,side=LEFT,anchor="n")
+ext_but1.pack()
+
+b=Button(ext_but1,text="%",font="courier 35 italic")
+b.bind("<Button-1>",work)
+b.pack(padx=20,side=LEFT,anchor="n")
+ext_but1.pack()
+#
+b=Button(next_but,text="0",font="courier 35 italic")
+b.bind("<Button-1>",work)
+b.pack(padx=20,side=LEFT,anchor="n")
+#
+b=Button(next_but,text="=",font="courier 35 italic")
+b.bind("<Button-1>",work)
+b.pack(padx=20,side=LEFT,anchor="n")
+#
+b=Button(next_but,text="C",font="courier 35 italic")
+b.bind("<Button-1>",work)
+b.pack(padx=20,side=LEFT,anchor="n")
+next_but.pack()
+
+root.mainloop()
